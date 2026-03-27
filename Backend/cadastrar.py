@@ -1,3 +1,4 @@
+from datetime import datetime
 class Peca:
     def __init__(self, id, nome, custo, preco, estoque):
         self.id = id
@@ -32,6 +33,7 @@ def registrar_producao():
             valor_aumentar = int(input("Insira quanto quer aumentar no estoque: "))
             p.estoque += valor_aumentar
             peca_encontrada = True
+            print("Quantidade atual:", p.estoque, "Horário da mudança: ", datetime.now())
             break
     if not peca_encontrada:
         print("Peça não encontrada!")
@@ -43,12 +45,13 @@ def vender_peca():
     peca_encontrada = False
     for p in pecas:
         if p.id == id_digitado:
-            valor_venda = int(input("Insira a quantidade que deseja vender: "))
-            if valor_venda > p.estoque:
+            quantidade_venda = int(input("Insira a quantidade que deseja vender: "))
+            if quantidade_venda > p.estoque:
                 print("Estoque insuficiente!")
             else:
-                p.estoque -= valor_venda
+                p.estoque -= quantidade_venda
             peca_encontrada = True
+            print("Quantidade atual:", p.estoque, "Horário da mudança: ", datetime.now())
             break
     if not peca_encontrada:
         print("Peça não encontrada!")

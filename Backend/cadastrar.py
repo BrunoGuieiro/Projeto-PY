@@ -1,19 +1,32 @@
-produto = {
-    "nome": "",
-    "custo_producao": 0,
-    "preco_venda": 0,
-    "estoque_atual": 0
-}
+class Produto:
+    def __init__(self, id, nome, custo, preco, estoque):
+        self.id = id
+        self.nome = nome
+        self.custo = custo
+        self.preco = preco
+        self.estoque = estoque
+        self.data = data
 
-def cadastrarProduto():
-    print("\n" + "="*40)
-    print("      Cadastrar Produto")
-    print("="*40)
-    produto["nome"] = input("Nome do produto: ")
-    produto["custo_producao"] = float(input("Custo de produção: "))
-    produto["preco_venda"] = float(input("Preço de venda: "))
-    produto["estoque_atual"] = int(input("Estoque atual: "))
+produtos = []
+
+def cadastrar_produto():
+    
+    nome = input("Nome: ")
+    custo = input("Custo: ")
+    preco = input("Preco: ")
+    estoque = input("Estoque: ")
+    novo_produto = Produto(
+        id = len(produtos) + 1,
+        nome = nome,
+        custo = custo,
+        preco = preco,
+        estoque = estoque,
+    )
+    produtos.append(novo_produto)
 
 
-cadastrarProduto()
-print(produto["nome", "custo_producao"])
+
+cadastrar_produto()
+
+for p in produtos:
+    print(p.id, p.nome, p.custo, p.preco, p.estoque)

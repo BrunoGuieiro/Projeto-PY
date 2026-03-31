@@ -1,32 +1,70 @@
-class Produto:
+from datetime import datetime
+class Peca:
     def __init__(self, id, nome, custo, preco, estoque):
         self.id = id
         self.nome = nome
         self.custo = custo
         self.preco = preco
         self.estoque = estoque
-        self.data = data
 
-produtos = []
+pecas = []
 
-def cadastrar_produto():
-    
+def cadastrar_peca():
     nome = input("Nome: ")
-    custo = input("Custo: ")
-    preco = input("Preco: ")
-    estoque = input("Estoque: ")
-    novo_produto = Produto(
-        id = len(produtos) + 1,
-        nome = nome,
-        custo = custo,
-        preco = preco,
-        estoque = estoque,
+    custo = float(input("Custo: "))
+    preco = float(input("Preco: "))
+    estoque = int(input("Estoque: "))
+    nova_peca = Peca(
+        id=len(pecas) + 1,
+        nome=nome,
+        custo=custo,
+        preco=preco,
+        estoque=estoque
     )
-    produtos.append(novo_produto)
+    pecas.append(nova_peca)
 
+def registrar_producao():
+    for p in pecas:
+        print(p.id, p.nome, p.custo, p.preco, p.estoque)
+    id_digitado = int(input("Id da peça: "))
+    peca_encontrada = False
+    for p in pecas:
+        if p.id == id_digitado:
+            valor_aumentar = int(input("Insira quanto quer aumentar no estoque: "))
+            p.estoque += valor_aumentar
+            peca_encontrada = True
+            print("Quantidade atual:", p.estoque, "Horário da mudança: ", datetime.now())
+            break
+    if not peca_encontrada:
+        print("Peça não encontrada!")
 
+def vender_peca():
+    for p in pecas:
+        print(p.id, p.nome, p.custo, p.preco, p.estoque)
+    id_digitado = int(input("Id da peça: "))
+    peca_encontrada = False
+    for p in pecas:
+        if p.id == id_digitado:
+            quantidade_venda = int(input("Insira a quantidade que deseja vender: "))
+            if quantidade_venda > p.estoque:
+                print("Estoque insuficiente!")
+            else:
+                p.estoque -= quantidade_venda
+            peca_encontrada = True
+            print("Quantidade atual:", p.estoque, "Horário da mudança: ", datetime.now())
+            break
+    if not peca_encontrada:
+        print("Peça não encontrada!")
 
-cadastrar_produto()
-
-for p in produtos:
+# Teste
+cadastrar_peca()
+for p in pecas:
     print(p.id, p.nome, p.custo, p.preco, p.estoque)
+
+registrar_producao()
+for p in pecas:
+    print(p.id, p.nome, p.estoque)
+
+vender_peca()
+for p in pecas:
+    print(p.id, p.nome, p.estoque)
